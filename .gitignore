@@ -12,3 +12,6 @@
 
 # Notes file
 NOTES.md
+
+# db files
+*.sqlite3
