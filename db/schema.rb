@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2) do
   create_table "items", force: :cascade do |t|
     t.text "description"
     t.integer "stage"
+    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
