@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
 
 	spec.add_dependency "require_all", "~> 2.0"
 	spec.add_dependency "curses", "~> 1.3"
+        spec.add_dependency "ncursesw", "~> 1.4"
 	spec.add_dependency "sinatra-activerecord", "~> 2.0"
 	spec.add_dependency "sqlite3", "~> 1.4"
 end

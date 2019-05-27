@@ -8,6 +8,12 @@ task :environment do
   require_relative 'config/environment'
 end
 
+desc 'test the board'
+task :board do
+	board = Board.new()
+	board.run
+end
+
 RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
