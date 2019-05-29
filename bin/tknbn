@@ -3,3 +3,4 @@
 require_relative '../config/environment.rb'
 
 # code to run application here
+Tknbn::App.new
