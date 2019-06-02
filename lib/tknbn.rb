@@ -33,12 +33,11 @@ module Tknbn
 				Curses.addstr(str)
 				@win.refresh
 				input = @win.getch
-				# binding.pry
 				case input
+				when "d"
+					MainMenu.new()
 				when "q"
-					str = "#{input} key pressed"
-					Curses.setpos(@height/2 + 1, 0)
-					Curses.addstr(str)
+					break
 				else
 					str = "#{input} key pressed"
 					Curses.setpos(@height/2 + 1, 0)
