@@ -38,6 +38,8 @@ module Tknbn
 					MainMenu.new()
 				when "q"
 					break
+				when "m"
+					ProjectMenu.new()
 				else
 					str = "#{input} key pressed"
 					Curses.setpos(@height/2 + 1, 0)
