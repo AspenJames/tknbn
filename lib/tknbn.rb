@@ -50,7 +50,6 @@ module Tknbn
 				end
 			end
 			Curses.close_screen
-			puts input
 		end
 	end
 end
