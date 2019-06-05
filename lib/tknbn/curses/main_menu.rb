@@ -2,10 +2,13 @@ class MainMenu
 	attr_reader :win1, :win2, :win3, :width, :height, :col_width, :project
 	
 	def initialize(height: nil, width: nil, project: nil)
+		# Can be initialized with a height, width, and project
+		# Height and width default to all available window space,
+		# project defaults to the last project created
 		@height = height || Curses.lines
 		@width = width || Curses.cols
 		@project = project || Project.last
-		@col_width = (@width - 2) / 3
+		@col_width = (@width - 2) / 3	# This sets up the width of each column
 
 		@win1 = Curses::Window.new(@height, @col_width, 0, 0)
 		@win2 = Curses::Window.new(@height, @col_width, 0, (@col_width + 1))
@@ -13,8 +16,11 @@ class MainMenu
 
 		##### TODO #####
 		@win1.box("|", "-")
+		# sub-window for the text area, so we can avoid overlapping the
+		# window border box we drew directly above.
 		w1_text_area = @win1.derwin(@height - 2, @col_width - 4, 1, 2)
 		td = "TODO"
+		# add the title text to the main column window for placement reasons
 		@win1.setpos(1, (@col_width / 2 - td.length / 2))
 		@win1.attrset(Curses::A_STANDOUT | Curses::A_UNDERLINE)
 		@win1.addstr(td)
@@ -26,6 +32,8 @@ class MainMenu
 			w1_text_area.setpos(curr_line, 0)
 			str = "#{idx + 1}. #{i.description}"
 			w1_text_area.addstr(str)
+			# This next line handles spacing elements that wrap
+			# beyond a single line.
 			curr_line += (str.length / (@col_width - 4) + 2)
 		end
 

@@ -8,7 +8,6 @@ module Tknbn
 	
 	class App
 		attr_reader :win, :width, :height
-		@@is_running = true
 
 		def initialize
 			@win = Curses.init_screen
@@ -22,38 +21,34 @@ module Tknbn
 		end
 
 		def run
-			input = nil
-			str = ''
-			while @@is_running
+			loop do
 				@win.clear
 				menu_string = "Welcome to TKNBN\n"
 				Curses.setpos(@height/2, @width/2 - menu_string.length/2)
 				Curses.addstr(menu_string)
 				Curses.setpos(@height/2 + 1, @width/2 - str.length/2)
-				Curses.addstr(str)
 				@win.refresh
-				input = @win.getch
-				case input
+
+				case @win.getch # Get a keypress from the user
 				when "d"
 					MainMenu.new()
-				when "q"
-					break
 				when "m"
 					choice = ProjectMenu.new().get_choice
 					proj = Project.all[choice]
 					@win.clear
 					@win.refresh
 					MainMenu.new(project: proj)
+				when "q"
+					break # exit the loop when we're done
 				else
+					# This is good for getting character keys and/or
+					# codes as read by Curses.getch
 					str = "#{input} key pressed"
 					Curses.setpos(@height/2 + 1, 0)
 					Curses.addstr(str)
-					# @win.refresh
-					# @win.getch
-					# @@is_running = false
 				end
 			end
-			Curses.close_screen
+			Curses.close_screen # close the screen when we're done
 		end
 	end
 end
