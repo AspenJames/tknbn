@@ -13,6 +13,7 @@ class MainMenu
 
 		##### TODO #####
 		@win1.box("|", "-")
+		w1_text_area = @win1.derwin(@height - 2, @col_width - 4, 1, 2)
 		td = "TODO"
 		@win1.setpos(1, (@col_width / 2 - td.length / 2))
 		@win1.attrset(Curses::A_STANDOUT | Curses::A_UNDERLINE)
@@ -22,8 +23,8 @@ class MainMenu
 		curr_line = 3
 
 		@project.todo.each_with_index do |i, idx|
-			@win1.setpos(curr_line, 2)
-			@win1.addstr("#{idx + 1}. #{i.description}")
+			w1_text_area.setpos(curr_line, 0)
+			w1_text_area.addstr("#{idx + 1}. #{i.description}")
 			curr_line += (i.description.length / @col_width + 2)
 		end
 
@@ -31,6 +32,7 @@ class MainMenu
 
 		#####IN PROGRESS#####
 		@win2.box("|", "-")
+		w2_text_area = @win2.derwin(@height - 2, @col_width - 4, 1, 2)
 		ip = "In Progress"
 		@win2.setpos(1, (@col_width / 2 - ip.length / 2))
 		@win2.attrset(Curses::A_STANDOUT | Curses::A_UNDERLINE)
@@ -40,14 +42,15 @@ class MainMenu
 		curr_line = 3
 
 		@project.in_progress.each_with_index do |i, idx|
-			@win2.setpos(curr_line, 2)
-			@win2.addstr("#{idx + 1}. #{i.description}")
+			w2_text_area.setpos(curr_line, 0)
+			w2_text_area.addstr("#{idx + 1}. #{i.description}")
 			curr_line += (i.description.length / @col_width + 2)
 		end
 		@win2.refresh
 
 		##### DONE #####
 		@win3.box("|", "-")
+		w3_text_area = @win3.derwin(@height - 2, @col_width - 4, 1, 2)
 		d = "Done"
 		@win3.setpos(1, (@col_width / 2 - d.length / 2))
 		@win3.attrset(Curses::A_STANDOUT | Curses::A_UNDERLINE)
@@ -57,8 +60,8 @@ class MainMenu
 		curr_line = 3
 
 		@project.done.each_with_index do |i, idx|
-			@win3.setpos(curr_line, 2)
-			@win3.addstr("#{idx + 1}. #{i.description}")
+			w3_text_area.setpos(curr_line, 0)
+			w3_text_area.addstr("#{idx + 1}. #{i.description}")
 			curr_line += (i.description.length / @col_width + 2)
 		end
 		@win3.refresh

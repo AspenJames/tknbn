@@ -11,4 +11,4 @@ ActiveRecord::Base.establish_connection(
 	:database => 'db/tknbn-dev.sqlite3'
 )
 
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.logger = nil
