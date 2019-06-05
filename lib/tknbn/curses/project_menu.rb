@@ -4,47 +4,42 @@ class ProjectMenu
 	def initialize(height: nil, width: nil)
 		@height = height || Curses.lines / 2
 		@width = width || Curses.cols / 2
-		cur_line = 2
+		@win = Curses::Window.new(@height, @width, @height/2, @width/2)
 
 		@highlight = 1
+	end
 
-		@win = Curses::Window.new(@height, @width, @height/2, @width/2)
-		@win.box("/","~")
-		@win.setpos(cur_line, 2)
-		cur_line += 1
-		cur_line += 1
-		@win.addstr("Choose an option")
+	def get_choice
+		begin
+			@win.box("/","~")
+			@win.setpos(2, 2)
+			@win.addstr("Choose an option")
 
-		loop do
-			c = @win.getch
-			case c
-			when 'j'
-				if @highlight == Project.all.length
-					@highlight = 1
-				else
-					@highlight += 1
+			loop do
+				display_menu
+				c = @win.getch
+				case c
+				when 'j'
+					if @highlight == Project.all.length
+						@highlight = 1
+					else
+						@highlight += 1
+					end
+				when 'k'
+					if @highlight == 1
+						@highlight = Project.all.length
+					else
+						@highlight -= 1
+					end
+				when 10
+					@choice = @highlight
+					break
 				end
-			when 'k'
-				if @highlight == 1
-					@highlight = Project.all.length
-				else
-					@highlight -= 1
-				end
-			when 10
-				@choice = @highlight
-				break
 			end
-			display_menu
+		ensure
+			@win.close
 		end
-
-		# Project.all.each do |p|
-		# 	@win.setpos(cur_line, 3)
-		# 	@win.addstr(p.display)
-		# 	cur_line += 1
-		# end
-		@win.refresh
-		@win.getch
-		@win.close
+		@choice - 1
 	end
 
 	def display_menu

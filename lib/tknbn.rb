@@ -39,7 +39,9 @@ module Tknbn
 				when "q"
 					break
 				when "m"
-					ProjectMenu.new()
+					choice = ProjectMenu.new().get_choice
+					proj = Project.all[choice]
+					MainMenu.new(project: proj)
 				else
 					str = "#{input} key pressed"
 					Curses.setpos(@height/2 + 1, 0)
