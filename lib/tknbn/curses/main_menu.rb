@@ -24,8 +24,9 @@ class MainMenu
 
 		@project.todo.each_with_index do |i, idx|
 			w1_text_area.setpos(curr_line, 0)
-			w1_text_area.addstr("#{idx + 1}. #{i.description}")
-			curr_line += (i.description.length / @col_width + 2)
+			str = "#{idx + 1}. #{i.description}"
+			w1_text_area.addstr(str)
+			curr_line += (str.length / (@col_width - 4) + 2)
 		end
 
 		@win1.refresh
@@ -43,8 +44,9 @@ class MainMenu
 
 		@project.in_progress.each_with_index do |i, idx|
 			w2_text_area.setpos(curr_line, 0)
-			w2_text_area.addstr("#{idx + 1}. #{i.description}")
-			curr_line += (i.description.length / @col_width + 2)
+			str = "#{idx + 1}. #{i.description}"
+			w2_text_area.addstr(str)
+			curr_line += (str.length / (@col_width - 4) + 2)
 		end
 		@win2.refresh
 
@@ -61,8 +63,9 @@ class MainMenu
 
 		@project.done.each_with_index do |i, idx|
 			w3_text_area.setpos(curr_line, 0)
-			w3_text_area.addstr("#{idx + 1}. #{i.description}")
-			curr_line += (i.description.length / @col_width + 2)
+			str = "#{idx + 1}. #{i.description}"
+			w3_text_area.addstr(str)
+			curr_line += (str.length / (@col_width - 4) + 2)
 		end
 		@win3.refresh
 

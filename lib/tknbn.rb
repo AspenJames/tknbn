@@ -41,6 +41,8 @@ module Tknbn
 				when "m"
 					choice = ProjectMenu.new().get_choice
 					proj = Project.all[choice]
+					@win.clear
+					@win.refresh
 					MainMenu.new(project: proj)
 				else
 					str = "#{input} key pressed"
