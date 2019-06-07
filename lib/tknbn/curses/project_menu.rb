@@ -8,7 +8,7 @@ class ProjectMenu
 		@width = width || Curses.cols / 2
 		@win = Curses::Window.new(@height, @width, @height/2, @width/2)
 
-		@highlight = 1
+		@highlight = 0
 	end
 
 	def get_choice
@@ -22,20 +22,20 @@ class ProjectMenu
 				c = @win.getch
 				case c
 				when 'j'
-					if @highlight == Project.all.length - 1 # if highlight equals
-						@highlight = 0												# the last index, reset
+					if @highlight == Project.all.length # if highlight equals
+						@highlight = 0										# the last index, reset
 					else
-						@highlight += 1												# Otherwise increment
+						@highlight += 1										# Otherwise increment
 					end
 				when 'k'
-					if @highlight == 0										# if highlight is zero
-						@highlight = Project.all.length - 1 # reset to end
+					if @highlight == 0									# if highlight is zero
+						@highlight = Project.all.length 	# reset to end
 					else
-						@highlight -= 1											# Otherwise decrement
+						@highlight -= 1										# Otherwise decrement
 					end
 				when 10 # 'Enter' = 10
-					@choice = @highlight # save the selection
-					break								 # Exit the loop
+					@choice = @highlight 								# save the selection
+					break								 								# Exit the loop
 				end
 			end
 		ensure
@@ -46,15 +46,17 @@ class ProjectMenu
 
 	def display_menu
 		cur_line = 4 # sets position of fist option
-		Project.all.each_with_index do |p, idx|
+		opts = Project.all.map(&:name)
+		opts.push("Create a new project")
+		opts.each_with_index do |opt, idx|
 			@win.setpos(cur_line, 3)
 
 			if @highlight == idx	# if the current item is to be highlighted:
 				@win.attron(Curses::A_REVERSE)
-				@win.addstr(p.name)
+				@win.addstr(opt)
 				@win.attroff(Curses::A_REVERSE)
 			else
-				@win.addstr(p.name)
+				@win.addstr(opt)
 			end
 			cur_line += 1 # increment the current line
 		end
