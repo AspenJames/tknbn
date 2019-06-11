@@ -6,19 +6,28 @@ class MainMenu
 		# Height and width default to all available window space,
 		# project defaults to the last project created
 		@height = height || Curses.lines
-		@height -= 4
+		@height -= 6
 		@width = width || Curses.cols
 		@project = project || Project.last
 		@col_width = (@width - 2) / 3	# This sets up the width of each column
 
-		@win1 = Curses::Window.new(@height, @col_width, 0, 0)
+		# proj_title = @project.name
+		# Curses.setpos(0, @width/2 - proj_title.length/2)
+		proj_title = @project.name
+		Curses.setpos(0, 0)
+		Curses.attron(Curses.color_pair(2) | Curses::A_STANDOUT | Curses::A_BOLD)
+		Curses.addstr(proj_title.center(@width))
+		Curses.attroff(Curses.color_pair(2) | Curses::A_STANDOUT | Curses::A_BOLD)
+		Curses.refresh
+
+		@win1 = Curses::Window.new(@height, @col_width, 2, 0)
 		@w1_text_area = @win1.derwin(@height - 2, @col_width - 4, 1, 2)
-		@win2 = Curses::Window.new(@height, @col_width, 0, (@col_width + 1))
+		@win2 = Curses::Window.new(@height, @col_width, 2, (@col_width + 1))
 		@w2_text_area = @win2.derwin(@height - 2, @col_width - 4, 1, 2)
-		@win3 = Curses::Window.new(@height, @col_width, 0, (2 * (@col_width + 1)))
+		@win3 = Curses::Window.new(@height, @col_width, 2, (2 * (@col_width + 1)))
 		@w3_text_area = @win3.derwin(@height - 2, @col_width - 4, 1, 2)
 
-		@tool_area = Curses::Window.new(4, @width, @height, 0)
+		@tool_area = Curses::Window.new(4, @width, @height + 2, 0)
 
 		# Create a Highlight struct to maintain a 'pointer'
 		# to the currently selected item
@@ -262,9 +271,13 @@ class MainMenu
 
 	def display_items
 		[@w1_text_area, @w2_text_area, @w3_text_area].each { |w| w.clear }
+		@tool_area.attron(Curses.color_pair(2))
 		@tool_area.box("|", "-")
+		@tool_area.attroff(Curses.color_pair(2))
 		@tool_area.setpos(1, 2)
+		@tool_area.attron(Curses::A_BOLD)
 		@tool_area.addstr("h,j,k,l - movement    a - add item    d - delete    e - edit    q - quit")
+		@tool_area.attroff(Curses::A_BOLD)
 		@tool_area.refresh
 		##### TODO #####
 		@win1.box("|", "-")
@@ -273,9 +286,9 @@ class MainMenu
 		td = "TODO"
 		# add the title text to the main column window for placement reasons
 		@win1.setpos(1, (@col_width / 2 - td.length / 2))
-		@win1.attrset(Curses::A_STANDOUT | Curses::A_UNDERLINE)
+		@win1.attrset(Curses::A_UNDERLINE | Curses::A_BOLD)
 		@win1.addstr(td)
-		@win1.attroff(Curses::A_STANDOUT | Curses::A_UNDERLINE)
+		@win1.attroff(Curses::A_UNDERLINE | Curses::A_BOLD)
 
 		curr_line = 3
 
@@ -300,9 +313,9 @@ class MainMenu
 		@win2.box("|", "-")
 		ip = "In Progress"
 		@win2.setpos(1, (@col_width / 2 - ip.length / 2))
-		@win2.attrset(Curses::A_STANDOUT | Curses::A_UNDERLINE)
+		@win2.attrset(Curses::A_UNDERLINE | Curses::A_BOLD)
 		@win2.addstr(ip)
-		@win2.attroff(Curses::A_STANDOUT | Curses::A_UNDERLINE)
+		@win2.attroff(Curses::A_UNDERLINE | Curses::A_BOLD)
 
 		curr_line = 3
 
@@ -324,9 +337,9 @@ class MainMenu
 		@win3.box("|", "-")
 		d = "Done"
 		@win3.setpos(1, (@col_width / 2 - d.length / 2))
-		@win3.attrset(Curses::A_STANDOUT | Curses::A_UNDERLINE)
+		@win3.attrset(Curses::A_UNDERLINE | Curses::A_BOLD)
 		@win3.addstr(d)
-		@win3.attroff(Curses::A_STANDOUT | Curses::A_UNDERLINE)
+		@win3.attroff(Curses::A_UNDERLINE | Curses::A_BOLD)
 
 		curr_line = 3
 
@@ -344,5 +357,4 @@ class MainMenu
 		end
 		@win3.refresh
 	end
-
 end

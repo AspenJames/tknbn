@@ -20,6 +20,7 @@ module Tknbn
 			Curses.crmode
 			Curses.curs_set(0)
 			Curses.init_pair(1, Curses::COLOR_RED, Curses::COLOR_BLACK)
+			Curses.init_pair(2, Curses::COLOR_CYAN, Curses::COLOR_BLACK)
 			self.run
 		end
 
