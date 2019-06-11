@@ -17,17 +17,16 @@ class NewProject
 	def get_name
 		display
 		@win.setpos(3,1)
-		Curses.curs_set(1)
-		Curses.echo
-		input = @win.getstr
-		if input.length > 1
+		Curses.curs_set(1) # make cursor visible
+		Curses.echo # make text entry visible
+		input = @win.getstr # get text from user
+		if input.length > 0 # if text is not empty
 			p = Project.create(name: input)
 		else
-			@win.clear
-			get_name
+			p = nil
 		end
 		Curses.curs_set(0)
 		Curses.noecho
-		p
+		p # return new project or nil
 	end
 end

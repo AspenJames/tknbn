@@ -13,7 +13,7 @@ class ProjectMenu
 
 	def get_choice
 		begin
-			@win.box("/","~")
+			@win.box('|', '-')
 			@win.setpos(2, 2)
 			@win.addstr("Choose an option")
 
@@ -21,13 +21,13 @@ class ProjectMenu
 				display_menu
 				c = @win.getch
 				case c
-				when 'j'
+				when 'B', 'j' # Down arrow or 'j'
 					if @highlight == Project.all.length # if highlight equals
 						@highlight = 0										# the last index, reset
 					else
 						@highlight += 1										# Otherwise increment
 					end
-				when 'k'
+				when 'A', 'k' # Up arrow or k
 					if @highlight == 0									# if highlight is zero
 						@highlight = Project.all.length 	# reset to end
 					else
@@ -36,6 +36,8 @@ class ProjectMenu
 				when 10 # 'Enter' = 10
 					@choice = @highlight 								# save the selection
 					break								 								# Exit the loop
+				when 'q' #, 27 # when 'q' or ESC
+					break
 				end
 			end
 		ensure

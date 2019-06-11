@@ -14,10 +14,12 @@ module Tknbn
 			@width = Curses.cols
 			@height = Curses.lines
 			@win.keypad = true
+			Curses.start_color
 			Curses.noecho
 			Curses.cbreak
 			Curses.crmode
 			Curses.curs_set(0)
+			Curses.init_pair(1, Curses::COLOR_RED, Curses::COLOR_BLACK)
 			self.run
 		end
 
@@ -45,14 +47,16 @@ module Tknbn
 						p = NewProject.new.get_name
 						@win.clear
 						@win.refresh
-						MainMenu.new(project: p)
-					else
+						if !p.nil?
+							MainMenu.new(project: p)
+						end
+					elsif choice != nil
 						proj = Project.all[choice]
 						@win.clear
 						@win.refresh
 						MainMenu.new(project: proj)
 					end
-				when "q"
+				when "q", 27
 					break # exit the loop when we're done
 				else
 					# This is good for getting character keys and/or
