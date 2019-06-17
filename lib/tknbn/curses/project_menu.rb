@@ -4,9 +4,10 @@ class ProjectMenu
 	def initialize(height: nil, width: nil)
 		# Can be initialized with height and width, but will
 		# default to half the size of the currently available window
+		Curses.clear
 		@height = height || Curses.lines / 2
-		@width = width || Curses.cols / 2
-		@win = Curses::Window.new(@height, @width, @height/2, @width/2)
+		@width = width || Curses.cols / 3
+		@win = Curses::Window.new(@height, @width, @height/2, @width)
 
 		@highlight = 0
 	end
@@ -15,7 +16,7 @@ class ProjectMenu
 		begin
 			@win.box('|', '-')
 			@win.setpos(2, 2)
-			@win.addstr("Choose an option")
+			@win.addstr("Choose a project")
 
 			loop do # this loop creates a 'scrollable' menu
 				display_menu
@@ -48,7 +49,7 @@ class ProjectMenu
 
 	def display_menu
 		cur_line = 4 # sets position of fist option
-		opts = Project.all.map(&:name)
+		opts = Project.most_recently_updated.map(&:name)
 		opts.push("Create a new project")
 		opts.each_with_index do |opt, idx|
 			@win.setpos(cur_line, 3)

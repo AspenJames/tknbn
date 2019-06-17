@@ -22,4 +22,14 @@ class Project < ActiveRecord::Base
 			i.stage == 3
 		end
 	end
+
+	def self.most_recently_updated
+		all.sort do |a, b|
+			b.items_most_recently_updated_at <=> a.items_most_recently_updated_at
+		end
+	end
+
+	def items_most_recently_updated_at
+		items.map(&:updated_at).max || self.updated_at
+	end
 end
