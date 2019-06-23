@@ -57,12 +57,16 @@ class MainMenu
 				move_cursor_right
 			when 'e' # edit currently selected item
 				edit_item
+				adjust_highlight
 			when 'v' # display currently selected item
 				view_item
+				adjust_highlight
 			when 'd' # delete currently selected item
 				delete_item
+				adjust_highlight
 			when 'a'
 				add_item
+				adjust_highlight
 			when 27 # quit on ESC
 				break
 			when 'q' # quit
@@ -266,6 +270,29 @@ class MainMenu
 			@project.in_progress[@hl.itm - 1]
 		else
 			@project.done[@hl.itm - 1]
+		end
+	end
+
+	def adjust_highlight
+		if @project.items.length == 0
+			@hl.col = 1
+			@hl.itm = 1
+		end
+		if @hl.col == 1 && @project.todo.length == 0
+			@hl.col = 3
+			adjust_highlight
+		elsif @hl.col == 1 && @hl.itm > @project.todo.length
+			@hl.itm = @project.todo.length
+		elsif @hl.col == 2 && @project.in_progress.length == 0
+			@hl.col = 1
+			adjust_highlight
+		elsif @hl.col == 2 && @hl.itm > @project.in_progress.length
+			@hl.itm = @project.in_progress.length
+		elsif @hl.col == 3 && @project.done.length == 0
+			@hl.col = 2
+			adjust_highlight
+		elsif @hl.col == 3 && @hl.itm > @project.done.length
+			@hl.itm = @project.done.length
 		end
 	end
 
