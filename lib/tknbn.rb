@@ -52,7 +52,7 @@ module Tknbn
 							MainMenu.new(project: p)
 						end
 					elsif choice != nil
-						proj = Project.all[choice]
+						proj = Project.most_recently_updated[choice]
 						@win.clear
 						@win.refresh
 						MainMenu.new(project: proj)
