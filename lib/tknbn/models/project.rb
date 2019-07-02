@@ -1,23 +1,27 @@
-# typed: false
+# typed: true
 class Project < ActiveRecord::Base
-	has_many :items
+	extend T::Sig
+	T.unsafe(self).has_many :items
 
-	validates :name, :uniqueness => true
+	T.unsafe(self).validates :name, :uniqueness => true
 
+	sig {returns(T::Array[Item])}
 	def todo
-		self.items.filter do |i|
+		T.unsafe(self).items.filter do |i|
 			i.stage == 1
 		end
 	end
 
+	sig {returns(T::Array[Item])}
 	def in_progress
-		self.items.filter do |i|
+		T.unsafe(self).items.filter do |i|
 			i.stage == 2
 		end
 	end
 
+	sig {returns(T::Array[Item])}
 	def done
-		self.items.filter do |i|
+		T.unsafe(self).items.filter do |i|
 			i.stage == 3
 		end
 	end
