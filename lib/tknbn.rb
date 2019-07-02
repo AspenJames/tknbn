@@ -1,3 +1,4 @@
+# typed: strong
 require "tknbn/version"
 
 module Tknbn

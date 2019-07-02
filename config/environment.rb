@@ -1,3 +1,4 @@
+# typed: false
 require 'bundler/setup'
 require 'sinatra/activerecord'
 require 'require_all'

@@ -43,4 +43,6 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "curses", "~> 1.3"
 	spec.add_dependency "sinatra-activerecord", "~> 2.0"
 	spec.add_dependency "sqlite3", "~> 1.4"
+	spec.add_dependency "sorbet", "~> 0.4.4366"
+	spec.add_dependency "sorbet-runtime", "~> 0.4.4366"
 end

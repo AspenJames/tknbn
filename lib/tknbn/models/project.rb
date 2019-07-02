@@ -1,3 +1,4 @@
+# typed: false
 class Project < ActiveRecord::Base
 	has_many :items
 
