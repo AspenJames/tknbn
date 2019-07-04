@@ -25,4 +25,16 @@ class Project < ActiveRecord::Base
 			i.stage == 3
 		end
 	end
+
+	sig {returns(T::Array[Project])}
+	def self.most_recently_updated
+		T.unsafe(self).all.sort do |a, b|
+			b.items_most_recently_updated_at <=> a.items_most_recently_updated_at
+		end
+	end
+
+	sig {returns(T::Array[Item])}
+	def items_most_recently_updated_at
+		items.map(&:updated_at).max || T.unsafe(self).updated_at
+	end
 end
