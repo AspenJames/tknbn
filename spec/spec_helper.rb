@@ -1,6 +1,5 @@
 # typed: strict
-require "bundler/setup"
-require "tknbn"
+require_relative '../config/environment'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

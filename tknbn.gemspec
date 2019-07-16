@@ -32,17 +32,18 @@ Gem::Specification.new do |spec|
   end
   spec.bindir        = "bin"
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+	spec.require_paths = ["lib", Dir.glob('lib/**/*')]
+
+	spec.add_runtime_dependency "require_all", "~> 2.0"
+	spec.add_runtime_dependency "curses", "~> 1.3"
+	spec.add_runtime_dependency "sinatra-activerecord", "~> 2.0"
+	spec.add_runtime_dependency "sqlite3", "~> 1.4"
+	spec.add_runtime_dependency "sorbet", "~> 0.4.4366"
+	spec.add_runtime_dependency "sorbet-runtime", "~> 0.4.4366"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry", "~> 0.12"
 
-	spec.add_dependency "require_all", "~> 2.0"
-	spec.add_dependency "curses", "~> 1.3"
-	spec.add_dependency "sinatra-activerecord", "~> 2.0"
-	spec.add_dependency "sqlite3", "~> 1.4"
-	spec.add_dependency "sorbet", "~> 0.4.4366"
-	spec.add_dependency "sorbet-runtime", "~> 0.4.4366"
 end
