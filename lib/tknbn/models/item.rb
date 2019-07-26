@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 class Item < ActiveRecord::Base
 	extend T::Sig
 	T.unsafe(self).belongs_to :project
@@ -8,7 +8,10 @@ class Item < ActiveRecord::Base
 	# to change as new stages/features added
 	T.unsafe(self).validates :stage, :inclusion => {:in => (1..3)}
 
-	sig {void}
+	T.unsafe(self).validates :description, :presence => true
+	T.unsafe(self).validates :project_id, :presence => true, :numericality => true
+
+	sig {returns(String)}
 	def stage_name
 		case T.unsafe(self).stage
 		when 1
