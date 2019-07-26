@@ -1,6 +1,8 @@
 # typed: strict
 require_relative '../config/environment'
 
+T.unsafe(ActiveRecord::Base).logger = nil
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
