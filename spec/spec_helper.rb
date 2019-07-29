@@ -1,4 +1,5 @@
 # typed: strict
+ENV['SINATRA_ENV'] = 'test'
 require_relative '../config/environment'
 
 T.unsafe(ActiveRecord::Base).logger = nil
