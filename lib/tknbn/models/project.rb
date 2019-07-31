@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
 	extend T::Sig
 	T.unsafe(self).has_many :items
 
+	T.unsafe(self).validates :name, :presence => true
 	T.unsafe(self).validates :name, :uniqueness => true
 
 	sig {returns(T::Array[Item])}
