@@ -34,8 +34,8 @@ class Project < ActiveRecord::Base
 		end
 	end
 
-	sig {returns(T::Array[Item])}
+	sig {returns(Time)}
 	def items_most_recently_updated_at
-		items.map(&:updated_at).max || T.unsafe(self).updated_at
+		T.unsafe(self).items.map(&:updated_at).max || T.unsafe(self).updated_at
 	end
 end
