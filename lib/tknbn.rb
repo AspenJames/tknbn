@@ -55,7 +55,8 @@ module Tknbn
 
 		sig {void}
 		def create_new_project
-			proj = NewProjectMenu.new
+			new_proj_menu = NewProjectMenu.new
+			proj = new_proj_menu.create_project
 			@win.clear
 			@win.refresh
 			ProjectDisplay.new(project: proj)
