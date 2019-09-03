@@ -1,8 +1,9 @@
 # typed: false
-require 'bundler'
+require 'bundler/setup'
 require 'require_all'
 require 'sinatra/activerecord'
 require 'sorbet-runtime'
+require 'curses'
 
 require_all 'lib'
 
