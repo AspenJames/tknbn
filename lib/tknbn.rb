@@ -1,11 +1,11 @@
 # typed: false
 require "tknbn/version"
-require 'Curses'
 
 module Tknbn
   class Error < StandardError; end
 
 	class App
+		extend T::Sig
 		attr_reader :win, :width, :height
 
 		sig {void}
@@ -30,11 +30,12 @@ module Tknbn
 		def run
 			display_welcome_screen
 			sleep(2)
-			choice = ProjectChoiceMenu.new
+			pm = ProjectChoiceMenu.new
+			choice = pm.get_choice
 			if choice == Project.all.length
 				create_new_project
 			else
-				get_selected_project
+				get_selected_project(choice)
 			end
 			Curses.close_screen
 		end
@@ -54,10 +55,10 @@ module Tknbn
 
 		sig {void}
 		def create_new_project
-			p = NewProjectMenu.new
+			proj = NewProjectMenu.new
 			@win.clear
 			@win.refresh
-			ProjectDisplay.new(project: p)
+			ProjectDisplay.new(project: proj)
 		end
 
 		sig {params(choice: Integer).void}
@@ -65,7 +66,7 @@ module Tknbn
 			proj = Project.most_recently_updated[choice]
 			@win.clear
 			@win.refresh
-			ProjectDisplay.new(project: p)
+			ProjectDisplay.new(project: proj)
 		end
 	end
 end
