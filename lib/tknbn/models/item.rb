@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 class Item < ActiveRecord::Base
 	extend T::Sig
 	T.unsafe(self).belongs_to :project

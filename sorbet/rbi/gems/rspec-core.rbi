@@ -1650,3 +1650,41 @@ module RSpec::Core::MockingAdapters::RSpec
   include RSpec::Mocks::ExampleMethods
   include RSpec::Mocks::ExampleMethods::ExpectHost
 end
+class RSpec::Core::ExampleStatusPersister
+  def dump_statuses(unparsed_previous_runs); end
+  def initialize(examples, file_name); end
+  def persist; end
+  def self.load_from(file_name); end
+  def self.persist(examples, file_name); end
+  def statuses_from_this_run; end
+end
+class RSpec::Core::ExampleStatusMerger
+  def delete_previous_examples_that_no_longer_exist; end
+  def example_must_no_longer_exist?(ex_id); end
+  def hash_from(example_list); end
+  def initialize(this_run, from_previous_runs); end
+  def loaded_spec_files; end
+  def merge; end
+  def self.merge(this_run, from_previous_runs); end
+  def sort_value_from(example); end
+  def spec_file_from(ex_id); end
+end
+class RSpec::Core::ExampleStatusDumper
+  def column_widths; end
+  def dump; end
+  def formatted_header_rows; end
+  def formatted_row_from(row_values); end
+  def formatted_value_rows; end
+  def headers; end
+  def initialize(examples); end
+  def rows; end
+  def self.dump(examples); end
+end
+class RSpec::Core::ExampleStatusParser
+  def headers; end
+  def initialize(string); end
+  def parse; end
+  def parse_row(line); end
+  def self.parse(string); end
+  def split_line(line); end
+end

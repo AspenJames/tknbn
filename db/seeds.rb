@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # create test projects
 pa = Project.create(:name => "Test project A")
 pb = Project.create(:name => "Test project B")

@@ -8,9 +8,13 @@ module ActiveModel::Type::BigInteger; end
 module ActiveModel::Type::Binary; end
 module ActiveModel::Type::Float; end
 module ActiveModel::Type::String; end
-module ActiveModel::Type::Value; end
-module ActiveModel::UnknownAttributeError; end
 module ActiveRecord::ConnectionAdapters::AbstractAdapter::SchemaCreation; end
+module ActiveRecord::ConnectionAdapters::ColumnDefinition; end
+module ActiveRecord::ConnectionAdapters::ColumnDefinition; end
+module ActiveRecord::Persistence::ActionController::Parameters; end
+module ActiveRecord::Persistence::ActionController::Parameters; end
+module ActiveRecord::Persistence::ActionController::Parameters; end
+module ActiveRecord::Persistence::ActionController::Parameters; end
 module ActiveSupport::ActionController::Base; end
 module Arel::Attributes::Attribute; end
 module Arel::Nodes::Node; end
