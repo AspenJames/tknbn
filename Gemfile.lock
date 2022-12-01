@@ -32,12 +32,13 @@ GEM
       concurrent-ruby (~> 1.0)
     method_source (0.9.2)
     minitest (5.11.3)
-    mustermann (1.0.3)
+    mustermann (3.0.0)
+      ruby2_keywords (~> 0.0.1)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    rack (2.0.7)
-    rack-protection (2.0.5)
+    rack (2.2.4)
+    rack-protection (3.0.4)
       rack
     rake (10.5.0)
     require_all (2.0.0)
@@ -54,10 +55,11 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    sinatra (2.0.5)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.5)
+    ruby2_keywords (0.0.5)
+    sinatra (3.0.4)
+      mustermann (~> 3.0)
+      rack (~> 2.2, >= 2.2.4)
+      rack-protection (= 3.0.4)
       tilt (~> 2.0)
     sinatra-activerecord (2.0.13)
       activerecord (>= 3.2)
@@ -65,15 +67,15 @@ GEM
     sorbet (0.4.4366)
       sorbet-static (= 0.4.4366)
     sorbet-runtime (0.4.4366)
-    sorbet-static (0.4.4366-universal-darwin-14)
+    sorbet-static (0.4.4366-x86_64-linux)
     sqlite3 (1.4.1)
     thread_safe (0.3.6)
-    tilt (2.0.9)
+    tilt (2.0.11)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   bundler (~> 2.0)
